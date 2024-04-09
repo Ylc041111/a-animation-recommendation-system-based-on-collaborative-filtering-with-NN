@@ -6,5 +6,5 @@ nltk_data是nltk库必须的数据（运行时自动下载，这里未上传）
 preprocessed_data.parquet是spark预处理数据
 模型文件是神经网络模型开发用到的源码，脚本和训练模型
 素材是用到的数据集中选取的部分数据集
-
+数据来源：https://www.kaggle.com/datasets/dbdmobile/myanimelist-dataset
 路径问题需要自己调整，包括py文件或者脚本的路径
