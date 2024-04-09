@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>this is a program to find what you may love~</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./loadstyle.css">
+</head>
+
+<body>
+    <div class="title">动漫推荐 | 基于神经网络改进的协同过滤算法</div>
+    <div class="needknow">
+        <span class="tip">使用须知 >>> Tips:</span>
+        <div class="mes">
+            <div>确保您的本地环境已配置： python 3.x | node v18+ | Java</div>
+            <div>并且python本地环境已安装的第三方库(包括但不限于):</div>
+            <div>nltk torch pandas numpy scikit-learn joblib pyspark</div>
+            <div>-- 详细信息请查看文档 --</div>
+            <div style="color: rgb(211, 71, 71);">否则程序可能无法正常运行</div>
+        </div>
+        <div class="confirm">我已知晓</div>
+    </div>
+    <div class="container">
+        <div id="slide">
+            <div class="item">
+                <span>1</span>
+                <p>请输入想看动漫的分数阈值: 如 8.00</p>
+                <input type="text" id="ScoreThreshold" placeholder="ScoreThreshold">
+            </div>
+            <div class="item">
+                <span>2</span>
+                <p>请输入上映日期: 如1990-08-22 或 1990</p>
+                <input type="text" id="Aired" placeholder="Aired">
+            </div>
+            <div class="item">
+                <span>3</span>
+                <p>请输入上映季节: 'spring': 1, 'summer': 2, 'fall': 3, 'winter': 4, 'UNKNOWN': -1</p>
+                <input type="text" id="PremieredSeason" placeholder="PremieredSeason">
+            </div>
+            <div class="item">
+                <span>4</span>
+                <p>请输入上映状态: 'Currently Airing': 1, 'Finished Airing': 2, 'Not yet aired': 3, 'UNKNOWN': -1</p>
+                <input type="text" id="Status" placeholder="Status">
+            </div>
+            <div class="item">
+                <span>5</span>
+                <p>请输入动漫起源: 如'Manga', 'Light Novel', Visual Novel', 'Original'等, Unknown': -1</p>
+                <input type="text" id="Source" placeholder="Source">
+            </div>
+            <div class="item">
+                <span>6</span>
+                <p>"请输入动漫形式: 如'Music', 'ONA', 'Movie', 'Special', 'OVA', 'TV', 'Unknown': -1</p>
+                <input type="text" id="Type" placeholder="Type">
+            </div>
+            <div class="item">
+                <span>7</span>
+                <p>请输入时长: 如 1 hr 30 min sec 或 30 min per ep</p>
+                <input type="text" id="Duration" placeholder="Duration">
+            </div>
+            <div class="item">
+                <span>8</span>
+                <p>请输入期望动漫的集数: </p>
+                <input type="text" id="Episodes" placeholder="Episodes">
+            </div>
+            <div class="item">
+                <span>9</span>
+                <p>请输入在平台上将动漫添加到列表中的成员数量: </p>
+                <input type="text" id="Members" placeholder="Members">
+            </div>
+            <div class="item">
+                <span>10</span>
+                <p>请输入为动漫打分的用户数量: </p>
+                <input type="text" id="ScoredBy" placeholder="ScoredBy">
+            </div>
+            <div class="item">
+                <span>11</span>
+                <p>请输入动漫的人气排名: </p>
+                <input type="text" id="Popularity" placeholder="Popularity">
+            </div>
+            <div class="item">
+                <span>12</span>
+                <p>请输入动漫被用户标记为收藏夹的次数: </p>
+                <input type="text" id="Favorites" placeholder="Favorites">
+            </div>
+            <div class="item">
+                <span>13</span>
+                <p>请输入制作动画的动画工作室: 如 Sunrise, Madhouse</p>
+                <input type="text" id="Studios" placeholder="Studios">
+            </div>
+            <div class="item">
+                <span>14</span>
+                <p>请输入动画年龄分集: 如 R - 17+ (violence & profanity): 1 或 PG-13 - Teens 13 or older: 2
+                    或 PG - Children: 3 或 R+ - Mild Nudity: 4 或 G - All Ages: 5 或 Rx - Hentai: 6</p>
+                <input type="text" id="Rating" placeholder="Rating">
+            </div>
+            <div class="item">
+                <span>15</span>
+                <p>请输入简介：对动漫情节的简要描述或总结</p>
+                <input type="text" id="Synopsis" placeholder="Synopsis">
+            </div>
+            <div class="item">
+                <span>16</span>
+                <p>请输入动漫的制作公司或制作人: 如 Sunrise, Madhouse</p>
+                <input type="text" id="Producers" placeholder="Producers">
+            </div>
+            <div class="item">
+                <span>All Arguments Preview</span>
+                <div class="all"></div>
+            </div>
+        </div>
+        <div class="buttons">
+            <div class="left">
+                < Prev</div>
+                    <div class="center" id="submit">1 / 16</div>
+                    <div class="right">Next ></div>
+            </div>
+        </div>
+
+        <div class="resultBox">
+            <div id="data">
+                <div id="detail"></div>
+                <div class="load">
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                </div>
+                <div class="loadText">LOADING...</div>
+                <div class="WaitTime">00 : 00</div>
+            </div>
+            <div class="back">返回</div>
+        </div>
+
+        <div id="historyBack">Historical Record</div>
+        <div id="removeAll">Remove All Arguments</div>
+
+        <div id="ErrorBox">
+            <div class="ErrorBoxText">程序遇到预料之外的错误！</div>
+        </div>
+
+        <!-- <div>creat-by:严and张</div> -->
+        <script src="./script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,7 @@
+所有源码及工程文件，模型及所需要的必要文件均在zip文件中。
+LoveChoose-工程文件是本软件UI工程文件
+minhash_lsh_model是协同过滤推荐的预训练模型
+nltk_data是nltk库必须的数据
+preprocessed_data.parquet是spark预处理数据
+模型文件是神经网络模型开发用到的源码，脚本和训练模型
+素材是用到的数据集部分数据集
